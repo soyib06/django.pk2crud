@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+
+<div class="container">
+    <div class="columns is-centered is-multiline">
+        {% for article in articles %}
+        <div class="column is-3">
+            <div class="card has-text-centered">
+                <div class="card-content">
+                    <div class="media">
+                        <div class="media-content">
+                            <p class="title has-text-dark is-2">
+                                {{ article.title }}
+                            </p>
+
+                            {% if user == article.auther %}
+                            <p class="subtitle is-4 has-text-grey">by you </p>
+                            {% else %}
+                            <p class="subtitle is-4 has-text-grey">by {{ article.auther }}</p>
+                            {% endif %}
+
+                        </div>
+                    </div>
+                    <div class="content ">
+                        <a href="{% url 'article_detail' article.slug %}">
+                            {{ article.snippet }}
+                        </a>
+                        <br>
+                        <div>{{ article.date }}</div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
